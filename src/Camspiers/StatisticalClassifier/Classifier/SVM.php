@@ -209,6 +209,9 @@ class SVM extends Classifier
             $probabilities = array();
             $category = $model->getModel()->predict_probability($data, $probabilities);
 
+            if( $this->debug )
+                $this->debugResults = $probabilities;
+
             return $probabilities[$category] > $this->threshold ? $categoryMap[$category] : false;
         } else {
             $category = $model->getModel()->predict($data);

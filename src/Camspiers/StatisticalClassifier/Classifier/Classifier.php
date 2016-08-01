@@ -23,6 +23,18 @@ use RuntimeException;
 abstract class Classifier implements ClassifierInterface
 {
     /**
+     * Tracks if the classifier is running in debug mode.
+     * If running in debug mode, information about the classify task will be stored.
+     * Debug information will only be stored in debug mode
+     */
+    protected $debug = false;
+
+    /**
+     * Debug information for a classify task
+     */
+    protected $debugResults = [];
+
+    /**
      * @var \Camspiers\StatisticalClassifier\DataSource\DataSourceInterface
      */
     protected $dataSource;
@@ -78,6 +90,25 @@ abstract class Classifier implements ClassifierInterface
             throw new RuntimeException("Argument to applyTransform must be callable");
         }
     }
+
+    /**
+     * Returns debug information for a classification task
+     * @return array
+     */
+    public function getDebugResults()
+    {
+        return $this->debugResults;
+    }  
+
+    /**
+     * Sets debug mode
+     * @return null
+     */
+    public function setDebug( $debug )
+    {
+        $this->debug = $debug;
+    }
+
     /**
      * @param \Camspiers\StatisticalClassifier\Model\ModelInterface $model
      */

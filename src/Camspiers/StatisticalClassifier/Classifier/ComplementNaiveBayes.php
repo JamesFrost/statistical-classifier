@@ -147,10 +147,11 @@ class ComplementNaiveBayes extends Classifier
 
         $this->model->setPrepared(true);
     }
+
     /**
      * @inheritdoc
      */
-    public function classify($document)
+    public function classify( $document )
     {
         $results = array();
 
@@ -178,6 +179,9 @@ class ComplementNaiveBayes extends Classifier
         }
 
         asort($results, SORT_NUMERIC);
+
+        if( $this->debug )
+            $this->debugResults = $results;
 
         $category = key($results);
 

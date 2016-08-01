@@ -35,8 +35,6 @@ class DocumentLength
                             [$documentIndex]
                             [$token] = $count / $denominator;
                     }
-                } else {
-                    throw new \RuntimeException("Cannot divide by 0 in DocumentLength transform");
                 }
             }
         }

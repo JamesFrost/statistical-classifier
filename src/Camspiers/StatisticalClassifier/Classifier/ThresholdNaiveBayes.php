@@ -18,8 +18,26 @@ namespace Camspiers\StatisticalClassifier\Classifier;
  * @author  Cam Spiers <camspiers@gmail.com>
  * @package Statistical Classifier
  */
-class ComplementNaiveBayes extends NaiveBayes
+class ThresholdNaiveBayes extends NaiveBayes
 {
+    private $confidenceThreshold;
+
+    public function __construct(
+        DataSourceInterface $dataSource,
+        $confidenceThreshold,
+        ModelInterface $model = null,
+        Document\NormalizerInterface $documentNormalizer = null,
+        TokenizerInterface $tokenizer = null,
+        Token\NormalizerInterface $tokenNormalizer = null
+        ) {
+        $this->dataSource         = $dataSource;
+        $this->confidenceThreshold = $confidenceThreshold;
+        $this->model              = $model ?: new Model();
+        $this->documentNormalizer = $documentNormalizer ?: new Document\Lowercase();
+        $this->tokenizer          = $tokenizer ?: new Word();
+        $this->tokenNormalizer    = $tokenNormalizer;
+    }
+
     /**
      * @inheritdoc
      */
@@ -34,7 +52,7 @@ class ComplementNaiveBayes extends NaiveBayes
 
         $value = array_shift($results);
 
-        if ($value === array_shift($results)) {
+        if ($value === array_shift($results) || $value > $this->confidenceThreshold ) {
             return false;
         } else {
             return $category;

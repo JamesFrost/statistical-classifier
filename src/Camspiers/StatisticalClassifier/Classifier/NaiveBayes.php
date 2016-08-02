@@ -177,6 +177,9 @@ abstract class NaiveBayes extends Classifier
 
         asort($results, SORT_NUMERIC);
 
+        if( $this->debug )
+            $this->debugResults = $results;
+
         return $results;
     }
 }

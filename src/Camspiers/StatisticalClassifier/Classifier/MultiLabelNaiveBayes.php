@@ -23,19 +23,22 @@ class MultiLabelNaiveBayes extends NaiveBayes
     private $confidenceThreshold;
 
     public function __construct(
-        DataSourceInterface $dataSource,
+        $dataSource,
         $confidenceThreshold,
         ModelInterface $model = null,
         Document\NormalizerInterface $documentNormalizer = null,
         TokenizerInterface $tokenizer = null,
         Token\NormalizerInterface $tokenNormalizer = null
     ) {
-        $this->dataSource         = $dataSource;
         $this->confidenceThreshold = $confidenceThreshold;
-        $this->model              = $model ?: new Model();
-        $this->documentNormalizer = $documentNormalizer ?: new Document\Lowercase();
-        $this->tokenizer          = $tokenizer ?: new Word();
-        $this->tokenNormalizer    = $tokenNormalizer;
+
+        parent::__construct(
+            $dataSource,
+            $model ,
+            $documentNormalizer ,
+            $tokenizer ,
+            $tokenNormalizer 
+        );
     }
 
     /**
@@ -44,9 +47,6 @@ class MultiLabelNaiveBayes extends NaiveBayes
     public function classify( $document )
     {
         $results = $this->getClassificationProbabilities( $document );
-
-        if( $this->debug )
-            $this->debugResults = $results;
 
         $assignedClasses = [];
 

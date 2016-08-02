@@ -23,19 +23,22 @@ class ThresholdNaiveBayes extends NaiveBayes
     private $confidenceThreshold;
 
     public function __construct(
-        DataSourceInterface $dataSource,
+        $dataSource,
         $confidenceThreshold,
         ModelInterface $model = null,
         Document\NormalizerInterface $documentNormalizer = null,
         TokenizerInterface $tokenizer = null,
         Token\NormalizerInterface $tokenNormalizer = null
         ) {
-        $this->dataSource         = $dataSource;
-        $this->confidenceThreshold = $confidenceThreshold;
-        $this->model              = $model ?: new Model();
-        $this->documentNormalizer = $documentNormalizer ?: new Document\Lowercase();
-        $this->tokenizer          = $tokenizer ?: new Word();
-        $this->tokenNormalizer    = $tokenNormalizer;
+            $this->confidenceThreshold = $confidenceThreshold;
+
+            parent::__construct(
+                $dataSource,
+                $model ,
+                $documentNormalizer ,
+                $tokenizer ,
+                $tokenNormalizer 
+            );
     }
 
     /**
@@ -45,9 +48,6 @@ class ThresholdNaiveBayes extends NaiveBayes
     {
         $results = $this->getClassificationProbabilities( $document );
 
-        if( $this->debug )
-            $this->debugResults = $results;
-
         $category = key($results);
 
         $value = array_shift($results);
@@ -55,7 +55,7 @@ class ThresholdNaiveBayes extends NaiveBayes
         if ($value === array_shift($results) || $value > $this->confidenceThreshold ) {
             return false;
         } else {
-            return $category;
+            return [ $category ];
         }
     }
 }

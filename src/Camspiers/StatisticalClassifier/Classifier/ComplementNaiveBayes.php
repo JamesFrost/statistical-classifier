@@ -27,9 +27,6 @@ class ComplementNaiveBayes extends NaiveBayes
     {
         $results = $this->getClassificationProbabilities( $document );
 
-        if( $this->debug )
-            $this->debugResults = $results;
-
         $category = key($results);
 
         $value = array_shift($results);
@@ -37,7 +34,7 @@ class ComplementNaiveBayes extends NaiveBayes
         if ($value === array_shift($results)) {
             return false;
         } else {
-            return $category;
+            return [ $category ];
         }
     }
 }

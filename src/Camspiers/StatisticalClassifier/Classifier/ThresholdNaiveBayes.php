@@ -26,7 +26,7 @@ class ThresholdNaiveBayes extends NaiveBayes
         $dataSource,
         $confidenceThreshold,
         ModelInterface $model = null,
-        Document\NormalizerInterface $documentNormalizer = null,
+        $documentNormalizer = null,
         TokenizerInterface $tokenizer = null,
         Token\NormalizerInterface $tokenNormalizer = null
         ) {

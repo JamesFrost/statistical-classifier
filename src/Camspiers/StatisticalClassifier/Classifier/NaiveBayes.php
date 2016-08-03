@@ -48,14 +48,14 @@ abstract class NaiveBayes extends Classifier
      * Create the Naive Bayes Classifier
      * @param DataSourceInterface          $dataSource
      * @param ModelInterface               $model              An model to store data in
-     * @param Document\NormalizerInterface $documentNormalizer The normalizer to make document consistent
+     * @param Document\a $documentNormalizer The normalizer to make document consistent
      * @param TokenizerInterface           $tokenizer          The tokenizer to break up the documents
      * @param Token\NormalizerInterface    $tokenNormalizer    The normaizer to make tokens consistent
      */
     public function __construct(
         DataSourceInterface $dataSource,
         ModelInterface $model = null,
-        Document\NormalizerInterface $documentNormalizer = null,
+        $documentNormalizer = null,
         TokenizerInterface $tokenizer = null,
         Token\NormalizerInterface $tokenNormalizer = null
     ) {

@@ -30,10 +30,5 @@
 		"psr-0": {
 			"Camspiers\\StatisticalClassifier": "src/"
 		}
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-master": "0.9.x-dev"
-		}
 	}
 }

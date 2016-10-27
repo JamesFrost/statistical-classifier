@@ -1,5 +1,5 @@
 {
-	"name": "camspiers/statistical-classifier",
+	"name": "jamesfrost/statistical-classifier",
 	"description": "A PHP implementation of Complement Naive Bayes and SVM statistical classifiers, including a structure for building other classifier, multiple data sources and multiple caching backends",
 	"keywords": ["classifier", "svm", "naive", "bayes"],
 	"homepage": "http://php-classifier.com/",
